@@ -1,6 +1,11 @@
 // Reference event listener from socket.io code imported in index.html
 const socket = io();
 
+// Sets Zoom SDK version for app and loads required scripts
+ZoomMtg.setZoomJSLib("https://source.zoom.us/1.8.1/lib", "/av");
+ZoomMtg.preLoadWasm();
+ZoomMtg.prepareJssdk();
+
 // Attempts to connect to Zoom meeting, launches zoom client if successful
 // Built on ZoomMtg object imported in index.html, called in response to server below
 function joinMeeting(meetingConfig) {
@@ -16,8 +21,7 @@ function joinMeeting(meetingConfig) {
       ZoomMtg.join({
         meetingNumber: meetingConfig.meetingNumber,
         userName: meetingConfig.userName,
-        // Below is sugar for signature: signature,
-        signature,
+        signature: meetingConfig.signature,
         apiKey: meetingConfig.apiKey,
         passWord: meetingConfig.passWord,
 
