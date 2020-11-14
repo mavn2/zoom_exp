@@ -15,8 +15,8 @@ module.exports = (app, io) => {
   
   
   // Takes user-specific parameters, and returns meeting configuration object
-  app.post("/api/:id/:pwd/:name", (req, res) => {
-  zoom.setMeetingParameters(req.params.id, req.params.pwd, req.params.name)
+  app.post("/create", (req, res) => {
+    zoom.setMeetingParameters(req.body.id, req.body.pwd, req.body.name)
     .then((data) => {
       io.sockets.emit("post", data);
       res.json(data);
