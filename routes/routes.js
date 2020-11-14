@@ -6,9 +6,18 @@ const zoom = require("../zoomCode")
 
 module.exports = (app) => {
   app.get("/:id/:pwd/:name", (req, res) => {
-    zoom.test(req.params.id, req.params.pwd, req.params.name)
-    zoom.setMeetingParameters(req.params.id, req.params.pwd, req.params.name)
     res.sendFile(path.join(__dirname, "../public/index.html"))
+    });
+  
+  app.get("/api/:id/:pwd/:name", (req, res) => {
+  (zoom.setMeetingParameters(req.params.id, req.params.pwd, req.params.name))
+    .then((data) => {
+      res.json(data)
+    })
   });
 };
  
+async function test(req){
+  result = await zoom.setMeetingParameters(req.params.id, req.params.pwd, req.params.name);
+  console.log(result)
+}
