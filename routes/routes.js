@@ -18,6 +18,7 @@ module.exports = (app, io) => {
   app.post("/api/:id/:pwd/:name", (req, res) => {
   zoom.setMeetingParameters(req.params.id, req.params.pwd, req.params.name)
     .then((data) => {
+      io.sockets.emit("post", data);
       res.json(data);
     });
   });
