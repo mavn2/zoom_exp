@@ -2,22 +2,23 @@
 const path = require("path");
 
 //Require zoom object w/ meeting methods
-const zoom = require("../zoomCode")
+const zoom = require("../zoomCode");
 
-module.exports = (app) => {
-  app.get("/:id/:pwd/:name", (req, res) => {
-    res.sendFile(path.join(__dirname, "../public/index.html"))
-    });
+// Define routes in function to be exported to app, allowing app and socket.io
+// to be passed in as references
+module.exports = (app, io) => {
+
+  // Establishes default route
+  app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "../public/index.html"));
+  });
   
-  app.get("/api/:id/:pwd/:name", (req, res) => {
-  (zoom.setMeetingParameters(req.params.id, req.params.pwd, req.params.name))
+  
+  // Takes user-specific parameters, and returns meeting configuration object
+  app.post("/api/:id/:pwd/:name", (req, res) => {
+  zoom.setMeetingParameters(req.params.id, req.params.pwd, req.params.name)
     .then((data) => {
-      res.json(data)
-    })
+      res.json(data);
+    });
   });
 };
- 
-async function test(req){
-  result = await zoom.setMeetingParameters(req.params.id, req.params.pwd, req.params.name);
-  console.log(result)
-}
