@@ -19,7 +19,7 @@ module.exports = (app, io) => {
     zoom.setMeetingParameters(req.body.id, req.body.pwd, req.body.name)
     .then((data) => {
       io.sockets.emit("post", data);
-      res.json(data);
+      res.set('Access-Control-Allow-Origin', '*').json(data);
     });
   });
 };
