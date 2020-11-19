@@ -9,13 +9,14 @@ const zoom = require("../zoomCode");
 module.exports = (app, io) => {
 
   // Establishes default route
-  app.get("/", (req, res) => {
+  app.get("/:id", (req, res) => {
     res.sendFile(path.join(__dirname, "../public/index.html"));
   });
   
   
   // Takes user-specific parameters, and returns meeting configuration object
-  app.post("/create", (req, res) => {
+  app.post("/create/:id", (req, res) => {
+    const id = req.params.id
     zoom.setMeetingParameters(req.body.id, req.body.pwd, req.body.name)
     .then((data) => {
       io.sockets.emit("post", data);

@@ -6,6 +6,10 @@ ZoomMtg.setZoomJSLib("https://source.zoom.us/1.8.1/lib", "/av");
 ZoomMtg.preLoadWasm();
 ZoomMtg.prepareJssdk();
 
+//Get unique user id from url 
+const userId = location.pathname
+console.log(userId);
+
 // Attempts to connect to Zoom meeting, launches zoom client if successful
 // Built on ZoomMtg object imported in index.html, called in response to server below
 function joinMeeting(meetingConfig) {
