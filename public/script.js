@@ -8,13 +8,12 @@ ZoomMtg.prepareJssdk();
 
 //Get unique user id from url 
 const userId = location.pathname.slice(1)
-console.log(userId);
 
 // Attempts to connect to Zoom meeting, launches zoom client if successful
 // Built on ZoomMtg object imported in index.html, called in response to server below
 function joinMeeting(meetingConfig) {
   ZoomMtg.init({
-    leaveUrl: meetingConfig.leaveUrl,
+    leaveUrl: location.href,
     // Enable two way audio-video over VoIP
     isSupportAV: true,
 

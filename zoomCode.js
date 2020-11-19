@@ -9,7 +9,7 @@ const zoom = {
       apiKey: process.env.ZOOM_API,
       apiSecret: process.env.ZOOM_SECRET,
       meetingNumber: meetingNum, 
-      leaveUrl: `https://ttzoomsignature.herokuapp.com/${userId}`, // redirect to home if join fails
+      leaveUrl: "", // redirect to user's page if join fails
       userName: userName, // required
       passWord: meetingPwd, 
       role: 0, // 0 : guest, 1 : host. Locked to guest--
