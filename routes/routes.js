@@ -19,7 +19,7 @@ module.exports = (app, io) => {
     const id = req.params.id
     zoom.setMeetingParameters(req.body.id, req.body.pwd, req.body.name)
     .then((data) => {
-      io.sockets.emit("post", data);
+      io.sockets.emit(id, data);
       res.json(data);
     });
   });

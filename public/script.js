@@ -7,7 +7,7 @@ ZoomMtg.preLoadWasm();
 ZoomMtg.prepareJssdk();
 
 //Get unique user id from url 
-const userId = location.pathname
+const userId = location.pathname.slice(1)
 console.log(userId);
 
 // Attempts to connect to Zoom meeting, launches zoom client if successful
@@ -43,7 +43,6 @@ function joinMeeting(meetingConfig) {
 
 // Use socket to listen for data sent from this app's server
 // in response to a request from the Thanksgiving Together app 
-socket.on('post', (data) => {
-  console.log(data)
+socket.on(userId, (data) => {
   joinMeeting(data)
 });
