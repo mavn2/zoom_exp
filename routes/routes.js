@@ -16,10 +16,10 @@ module.exports = (app, io) => {
   
   // Takes user-specific parameters, and returns meeting configuration object
   app.post("/create/:id", (req, res) => {
-    const id = req.params.id
-    zoom.setMeetingParameters(req.body.id, req.body.pwd, req.body.name)
+    const userId = req.params.id
+    zoom.setMeetingParameters(req.body.id, req.body.pwd, req.body.name, userId)
     .then((data) => {
-      io.sockets.emit(id, data);
+      io.sockets.emit(userId, data);
       res.json(data);
     });
   });

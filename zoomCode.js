@@ -2,15 +2,14 @@
 const axios = require("axios")
 
 const zoom = {
-  test: (id, pwd, name) => {console.log(id, pwd, name)},
 
   //Get unique signature and return meeting configuration settings
-  setMeetingParameters: async (meetingNum, meetingPwd, userName) => {
+  setMeetingParameters: async (meetingNum, meetingPwd, userName, userId) => {
     let zoomConfig = {
       apiKey: process.env.ZOOM_API,
       apiSecret: process.env.ZOOM_SECRET,
       meetingNumber: meetingNum, 
-      leaveUrl: "http://localhost:3000/", // redirect to home if join fails
+      leaveUrl: `https://ttzoomsignature.herokuapp.com/${userId}`, // redirect to home if join fails
       userName: userName, // required
       passWord: meetingPwd, 
       role: 0, // 0 : guest, 1 : host. Locked to guest--
