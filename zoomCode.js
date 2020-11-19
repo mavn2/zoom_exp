@@ -23,8 +23,6 @@ const zoom = {
     role: zoomConfig.role,
   });
 
-  console.log(typeof raw)
-
   const meetingConfig = axios({
     method: "post",
     url: "https://ttzoomsignature.herokuapp.com/",
@@ -37,7 +35,6 @@ const zoom = {
     .then((response) => {
       // Add signature k/v pair to config object defined above
       // This allows the entire config to be returned as an object, simplifying the browser side code
-      console.log(response.data.signature)
       zoomConfig.signature = response.data.signature
       //Pass the completed object back to parent
       return zoomConfig;
