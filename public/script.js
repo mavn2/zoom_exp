@@ -1,4 +1,7 @@
-// Reference event listener from socket.io code imported in index.html
+/* eslint-disable no-restricted-globals */
+/* eslint-disable no-undef */
+// Vars are set by scripts imported in index.html
+// Reference event listener from socket.io code
 const socket = io();
 
 // Sets Zoom SDK version for app and loads required scripts
@@ -6,8 +9,8 @@ ZoomMtg.setZoomJSLib("https://source.zoom.us/1.8.1/lib", "/av");
 ZoomMtg.preLoadWasm();
 ZoomMtg.prepareJssdk();
 
-//Get unique user id from url 
-const userId = location.pathname.slice(1)
+// Get unique user id from url
+const userId = location.pathname.slice(1);
 
 // Attempts to connect to Zoom meeting, launches zoom client if successful
 // Built on ZoomMtg object imported in index.html, called in response to server below
@@ -37,11 +40,11 @@ function joinMeeting(meetingConfig) {
         },
       });
     },
-  })
-};
+  });
+}
 
 // Use socket to listen for data sent from this app's server
-// in response to a request from the Thanksgiving Together app 
+// in response to a request from the Thanksgiving Together app
 socket.on(userId, (data) => {
-  joinMeeting(data)
+  joinMeeting(data);
 });
